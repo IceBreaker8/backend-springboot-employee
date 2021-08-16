@@ -16,48 +16,58 @@ public class EmployeeResource {
     public EmployeeResource(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
-    // routes
-    @GetMapping("/all")
-    public ResponseEntity<List<Employee>> getAllEmployees() {
-        List<Employee> employees = employeeService.findAllEmployees();
+
+    //user
+    @GetMapping("/get/users/{userId}/all")
+    public ResponseEntity<List<Employee>> getAllEmployees(@PathVariable("userId") Long userId) {
+        List<Employee> employees = employeeService.findAllEmployees(userId);
         return new ResponseEntity<>(employees, HttpStatus.OK);
     }
 
-    @GetMapping("/jobs/{jobTitle}")
-    public ResponseEntity<List<Employee>> getEmployeeByJobTitle(@PathVariable("jobTitle") String title) {
-        List<Employee> employees = employeeService.findAllEmployeesByJobTitle(title);
-        return new ResponseEntity<>(employees, HttpStatus.OK);
+    @PostMapping("/post/users/{userId}")
+    public ResponseEntity<?> addEmployee(@PathVariable Long userId,
+                                         @RequestBody Employee employee) {
+        employeeService.addEmployeeToUser(userId, employee);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/search/{name}")
-    public ResponseEntity<List<Employee>> getEmployeesByNameContaining(@PathVariable("name") String name) {
-        List<Employee> employees = employeeService.findEmployeesByNameContaining(name);
-        return new ResponseEntity<>(employees, HttpStatus.OK);
+    @DeleteMapping("/delete/users/{userId}/employees/{empId}")
+    public ResponseEntity<?> deleteEmployee(@PathVariable("userId") Long userId,
+                                            @PathVariable("empId") Long empId) {
+        employeeService.deleteEmployee(userId, empId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/find/{id}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") Long id) {
-        Employee employee = employeeService.findEmployeeById(id);
+    @PutMapping("/update/users/{userId}/employees/{empId}")
+    public ResponseEntity<Employee> updateEmployee(@PathVariable("userId") Long userId,
+                                                   @PathVariable("empId") Long empId,
+                                                   @RequestBody Employee employee) {
+        employeeService.updateEmployee(userId, empId, employee);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/find/users/{userId}/employees/{empId}")
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable("userId") Long userId,
+                                                    @PathVariable("empId") Long empId) {
+        Employee employee = employeeService.findEmployeesById(userId, empId);
         return new ResponseEntity<>(employee, HttpStatus.OK);
     }
 
-    @PostMapping("/add")
-    public ResponseEntity<Employee> addEmployee(@RequestBody Employee employee) {
-        Employee newEmployee = employeeService.addEmployee(employee);
-        return new ResponseEntity<>(newEmployee, HttpStatus.CREATED);
+    @GetMapping("/jobs/users/{userId}/employees/{jobTitle}")
+    public ResponseEntity<List<Employee>>
+    getEmployeesByJobTitle(@PathVariable("jobTitle") String jobTitle,
+                           @PathVariable("userId") Long userId) {
+        List<Employee> employees = employeeService.findEmployeesByJobTitle(userId, jobTitle);
+        return new ResponseEntity<>(employees, HttpStatus.OK);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable("id") Long id,
-                                                   @RequestBody Employee employee) {
-        employeeService.updateEmployee(id,employee);
-        return new ResponseEntity<>( HttpStatus.OK);
+    @GetMapping("/search/users/{userId}/employees/{name}")
+    public ResponseEntity<List<Employee>>
+    getEmployeesByNameContaining(@PathVariable("userId") Long userId,
+                                 @PathVariable("name") String name) {
+        List<Employee> employees = employeeService.findEmployeesByNameContaining(userId, name);
+        return new ResponseEntity<>(employees, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteEmployee(@PathVariable("id") Long id) {
-        employeeService.deleteEmployee(id);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
 
 }

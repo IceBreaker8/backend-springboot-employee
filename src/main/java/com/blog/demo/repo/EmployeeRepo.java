@@ -7,9 +7,16 @@ import java.util.List;
 import java.util.Optional;
 
 public interface EmployeeRepo extends JpaRepository<Employee, Long> {
-    void deleteEmployeeById(Long id);
 
     Optional<List<Employee>> findEmployeesByJobTitle(String jobTitle);
     Optional<Employee> findEmployeeById(Long id);
     Optional<List<Employee>> findEmployeesByNameContaining(String substring);
+
+    Optional<List<Employee>> findEmployeesByUserId(Long userId);
+
+    void deleteEmployeeByIdAndUserId(Long empId,Long userId);
+
+    Optional<Employee> findEmployeesByUserIdAndId(Long userId, Long empId);
+    Optional<List<Employee>> findEmployeesByUserIdAndJobTitle(Long userId, String jobTitle);
+    Optional<List<Employee>> findEmployeesByUserIdAndName(Long userId, String name);
 }
