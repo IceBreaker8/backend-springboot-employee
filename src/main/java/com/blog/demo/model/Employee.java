@@ -29,7 +29,7 @@ public class Employee implements Serializable {
     private String imageUrl;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id",referencedColumnName = "id")
     private User user;
 
 
