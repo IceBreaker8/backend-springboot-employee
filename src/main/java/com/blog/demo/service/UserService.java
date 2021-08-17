@@ -2,7 +2,6 @@ package com.blog.demo.service;
 
 
 import com.blog.demo.exceptions.UserNotFoundException;
-import com.blog.demo.model.Employee;
 import com.blog.demo.model.User;
 import com.blog.demo.repo.EmployeeRepo;
 import com.blog.demo.repo.UserRepo;
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Optional;
+
 
 @Service
 @Transactional
@@ -37,7 +36,7 @@ public class UserService {
         userRepo.deleteById(id);
     }
 
-    public User updateUser(Long id,User user){
+    public User updateUser(Long id, User user) {
         return userRepo.findById(id).map(user1 -> {
             user1.setEmail(user.getEmail());
             user1.setUsername(user.getUsername());
@@ -45,7 +44,8 @@ public class UserService {
             return userRepo.save(user1);
         }).orElseThrow(() -> new UserNotFoundException(""));
     }
-    public User findUser(Long id){
+
+    public User findUser(Long id) {
         return userRepo.findById(id).orElseThrow(() -> new UserNotFoundException(""));
     }
 

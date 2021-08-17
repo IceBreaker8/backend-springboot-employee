@@ -14,7 +14,6 @@ import java.util.Set;
 @Table(name = "user")
 @Getter
 @Setter
-@JsonIgnoreProperties({"HibernateLazyInitializer","Handler","employeeSet"})
 public class User implements Serializable {
 
     @Id
@@ -32,5 +31,9 @@ public class User implements Serializable {
     orphanRemoval = true)
     private Set<Employee> employeeSet = new HashSet<>();
 
+    @OneToOne(fetch = FetchType.LAZY,
+            cascade =  CascadeType.ALL,
+            mappedBy = "user")
+    private Profile profile;
 
 }

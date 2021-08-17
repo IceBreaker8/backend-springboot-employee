@@ -11,6 +11,7 @@ import java.io.Serializable;
 @Table(name = "employee")
 @Getter
 @Setter
+@JsonIgnoreProperties({"HibernateLazyInitializer","Handler","user"})
 public class Employee implements Serializable {
 
     @Id
