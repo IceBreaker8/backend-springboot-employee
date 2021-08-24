@@ -24,6 +24,9 @@ public class UserService {
         this.employeeRepo = employeeRepo;
     }
 
+    public User searchUserByEmail(String email){
+        return userRepo.findUserByEmail(email).orElseThrow(() -> new UserNotFoundException(""));
+    }
     public User addUser(User user) {
         return userRepo.save(user);
     }
