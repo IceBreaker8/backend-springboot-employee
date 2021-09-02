@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface ProfileRepo extends JpaRepository<Profile, Long> {
 
-    void deleteProfileByUserId(Long userId);
+    void deleteProfileByUserEmail(String email);
 
-    Optional<Profile> findProfileByUserId(Long userId);
+    Optional<Profile> findProfileByUserEmail(String email);
 }

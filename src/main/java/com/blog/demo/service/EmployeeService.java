@@ -69,7 +69,7 @@ public class EmployeeService {
 
 
     public List<Employee> findEmployeesByNameContaining(Long userId, String name) {
-        return employeeRepo.findEmployeesByUserIdAndName(userId,name).
+        return employeeRepo.findEmployeesByUserIdAndNameContaining(userId,name).
                 orElseThrow(() -> new UserNotFoundException("Can't find employees"));
     }
 

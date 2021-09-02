@@ -19,8 +19,15 @@ public class Profile implements Serializable {
     @Column(name = "id", nullable = false, updatable = false)
     private Long id;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "position")
+    private String position;
+
+    @Column(name = "age")
+    private int age;
+
+    @Column(name = "company")
+    private String company;
+
     @Column(name = "phone")
     private Long phone;
 

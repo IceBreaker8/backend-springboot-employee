@@ -18,29 +18,37 @@ public class ProfileResource {
         this.profileService = profileService;
     }
 
+    @GetMapping("/find/users/{email}")
+    public ResponseEntity<Profile> getProfile(@PathVariable("email")String email){
+        Profile profile = profileService.getProfileByUserEmail(email);
+        return new ResponseEntity<>(profile, HttpStatus.OK);
+    }
+
     @GetMapping("/all")
     public ResponseEntity<List<Profile>> getAllProfiles() {
         List<Profile> profiles = profileService.getAllProfiles();
         return new ResponseEntity<>(profiles, HttpStatus.OK);
     }
 
-    @PostMapping("/add/users/{userId}")
-    public ResponseEntity<Profile> addProfileToUser(@PathVariable(name = "userId") Long userId,
+
+
+    @PostMapping("/add/users/{email}")
+    public ResponseEntity<Profile> addProfileToUser(@PathVariable(name = "email") String email,
                                                     @RequestBody Profile profile) {
-        Profile profile1 = profileService.addProfileToUser(userId, profile);
+        Profile profile1 = profileService.addProfileToUser(email, profile);
         return new ResponseEntity<>(profile1, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/delete/users/{userId}")
-    public ResponseEntity<?> removeUserProfile(@PathVariable("userId") Long userId) {
-        profileService.deleteProfile(userId);
+    @DeleteMapping("/delete/users/{email}")
+    public ResponseEntity<?> removeUserProfile(@PathVariable("email") String email) {
+        profileService.deleteProfile(email);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PutMapping("/update/users/{userId}")
-    public ResponseEntity<Profile> updateUserProfile(@PathVariable("userId") Long userId,
+    @PutMapping("/update/users/{email}")
+    public ResponseEntity<Profile> updateUserProfile(@PathVariable("email") String email,
                                                      @RequestBody Profile profile) {
-        Profile profile1 = profileService.updateUserProfile(userId, profile);
+        Profile profile1 = profileService.updateUserProfile(email, profile);
         return new ResponseEntity<>(profile1, HttpStatus.OK);
     }
 }
