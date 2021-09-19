@@ -1,17 +1,15 @@
 pipeline {
   agent any
-  tools { 
-        maven 'MAVEN' 
-        jdk 'JDK'
-    }
-  stages{
-    stage('preflight') {
-      
+  stages {
+    stage('Build & Test') {
       steps {
-        
-        sh "mvn clean install"
+        sh 'mvn clean install'
       }
     }
+
   }
- 
+  tools {
+    maven 'MAVEN'
+    jdk 'JDK'
+  }
 }
