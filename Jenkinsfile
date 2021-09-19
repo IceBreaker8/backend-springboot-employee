@@ -3,9 +3,8 @@ pipeline {
   stages{
     stage('preflight') {
       steps {
-        withMaven(maven: 'MAVEN') {
-        sh 'mvn clean install'
-         }
+        def mvnHome = tool name: 'MAVEN', type: 'maven'
+        sh "${mvnHome}/bin/mvn package"
       }
     }
   }
