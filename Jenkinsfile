@@ -1,9 +1,21 @@
 pipeline {
   agent any
   stages {
-    stage('Build & Test') {
+    stage('Clean') {
       steps {
-        sh 'mvn clean install'
+        sh 'mvn clean'
+      }
+    }
+
+    stage('Test') {
+      steps {
+        sh 'mvn test'
+      }
+    }
+
+    stage('Maven Install') {
+      steps {
+        sh 'mvn install'
       }
     }
 
