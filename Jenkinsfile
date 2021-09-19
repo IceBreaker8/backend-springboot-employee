@@ -13,6 +13,12 @@ pipeline {
       }
     }
 
+    stage('Archive Jar') {
+      steps {
+        archiveArtifacts 'C:\\Windows\\system32\\config\\systemprofile\\.m2\\repository\\com\\blog\\demo\\0.0.1-SNAPSHOT\\demo-0.0.1-SNAPSHOT.jar'
+      }
+    }
+
   }
   tools {
     maven 'MAVEN'
