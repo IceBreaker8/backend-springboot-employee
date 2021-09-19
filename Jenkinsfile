@@ -1,11 +1,14 @@
 pipeline {
   agent any
+  tools { 
+        maven 'Maven 3.3.9' 
+    }
   stages{
     stage('preflight') {
-      def mvnHome = tool name: 'MAVEN', type: 'maven'
+      
       steps {
         
-        sh "${mvnHome}/bin/mvn package"
+        sh "mvn clean install"
       }
     }
   }
