@@ -1,9 +1,9 @@
 pipeline {
   agent any
   stages {
-    stage('test') {
+    stage('Maven Build') {
       steps {
-        echo 'hello backend'
+        sh 'mvnw clean install'
       }
     }
 
