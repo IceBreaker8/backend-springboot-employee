@@ -1,6 +1,6 @@
 pipeline {
   agent any
-  tools{MAVEN 'latest'}
+  tools{MAVEN}
   stages{
     stage('preflight') {
       steps {
