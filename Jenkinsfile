@@ -3,7 +3,7 @@ pipeline {
   stages{
     stage('preflight') {
       steps {
-        withMaven(maven: 'MAVEN', mavenSettingsConfig: 'MyGlobalSettings') {
+        withMaven(maven: 'MAVEN') {
         sh 'mvn clean install'
          }
       }
