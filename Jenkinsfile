@@ -1,8 +1,10 @@
 pipeline {
   agent any
   stages{
-    stage('Build'){
-      sh 'mvn clean install'
+    stage('preflight') {
+      steps {
+        echo 'test'
+      }
     }
   }
  
