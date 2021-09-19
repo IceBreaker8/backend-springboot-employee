@@ -19,6 +19,12 @@ pipeline {
       }
     }
 
+    stage('Deploy To EC2') {
+      steps {
+        sh 'eb deploy'
+      }
+    }
+
   }
   tools {
     maven 'MAVEN'
