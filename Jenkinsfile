@@ -21,7 +21,10 @@ pipeline {
 
     stage('Deploy To EC2') {
       steps {
-        sh 'eb deploy'
+       
+        sh 'aws s3 cp ./target/demo-0.0.1-SNAPSHOT.jar s3://elasticbeanstalk-eu-west-2-091256785188/demo-0.0.1-SNAPSHOT.jar'
+        sh 'aws elasticbeanstalk create-application-version --application-name employeeManager3.0 --version-label 3.0 --source-bundle S3Bucket=elasticbeanstalk-eu-west-2-091256785188,S3Key=demo-0.0.1-SNAPSHOT.jar'
+        sh 'aws elasticbeanstalk update-environment --application-name employeeManager3.0 --environment-name Employeemanager30-env --version-label 3.0'
       }
     }
 
