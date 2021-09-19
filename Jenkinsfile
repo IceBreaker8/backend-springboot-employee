@@ -3,7 +3,9 @@ pipeline {
   stages{
     stage('preflight') {
       steps {
-        echo 'test'
+        withMaven(maven: 'MAVEN', mavenSettingsConfig: 'mvn-setting-xml') {
+        sh 'mvn clean install'
+         }
       }
     }
   }
