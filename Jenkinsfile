@@ -8,4 +8,7 @@ pipeline {
     }
 
   }
+  environment {
+    maven = 'latest'
+  }
 }
