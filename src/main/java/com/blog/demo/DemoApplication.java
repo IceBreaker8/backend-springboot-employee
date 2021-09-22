@@ -12,6 +12,8 @@ import java.util.Arrays;
 @SpringBootApplication
 public class DemoApplication {
 
+	private String awsUrl = "https://d1n415kcld6pmi.cloudfront.net";
+	private String localHostUrl = "http://localhost:4200";
 	public static void main(String[] args) {
 		SpringApplication.run(DemoApplication.class, args);
 	}
@@ -19,7 +21,7 @@ public class DemoApplication {
 	public CorsFilter corsFilter() {
 		CorsConfiguration corsConfiguration = new CorsConfiguration();
 		corsConfiguration.setAllowCredentials(true);
-		corsConfiguration.setAllowedOrigins(Arrays.asList("https://d1n415kcld6pmi.cloudfront.net"));
+		corsConfiguration.setAllowedOrigins(Arrays.asList(awsUrl));
 		corsConfiguration.setAllowedHeaders(Arrays.asList("Origin", "Access-Control-Allow-Origin", "Content-Type",
 				"Accept", "Authorization", "Origin, Accept", "X-Requested-With",
 				"Access-Control-Request-Method", "Access-Control-Request-Headers"));
